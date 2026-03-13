@@ -33,7 +33,7 @@ Connect-MgGraph -Scopes "User.ReadWrite.All", "Domain.Read.All"
 
 Write-Host "`n🌍 Ophalen domeinnaam..." -ForegroundColor Cyan
 
-$domainName = Get-MgDomain | Select-Object -ExpandProperty Id
+$domainName = (Get-MgDomain | Where-Object {$_.IsDefault -eq $true}).Id
 Write-Host "✅ Gebruikt domein: $domainName" -ForegroundColor Green
 
 # -------------------------------
@@ -102,3 +102,4 @@ foreach ($user in $users) {
 }
 
 Write-Host "`n🎉 Voltooid!" -ForegroundColor Cyan
+
